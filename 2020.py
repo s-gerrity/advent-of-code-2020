@@ -96,28 +96,20 @@ def count_trees(map):
             continue
             
         # second row only
-        if plot in map[1]:
-            spot = plot[3]
-
-            if spot in '#':
-                counter += 1
+        if plot in map[1] and plot[3] == '#':
+            counter += 1
                 
         # other rows 
         else:
             i += 3
-            if i > 30:
-                i = (int(i) % 30) -1
-                spot = plot[i]
+            if i > (len(plot)-1):
+                i = (int(i) % (len(plot)-1)) -1
                 
-                if spot == '#':
+                if plot[i] == '#':
                     counter += 1
-                else:
-                    continue
+
             else:
-                spot = plot[i]
-                if spot == '#':
+                if plot[i] == '#':
                     counter += 1
-                else:
-                    continue
             
     return counter
