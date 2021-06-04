@@ -79,3 +79,45 @@ def validate_list(pwords):
             continue
             
     return valid_counter
+
+
+# DAY 3
+# Part 1 
+
+def count_trees(map):
+    map = map.split('\n')
+    counter = 0
+    i = 3
+
+    for plot in map:
+        
+        # pass first row
+        if plot in map[0]:
+            continue
+            
+        # second row only
+        if plot in map[1]:
+            spot = plot[3]
+
+            if spot in '#':
+                counter += 1
+                
+        # other rows 
+        else:
+            i += 3
+            if i > 30:
+                i = (int(i) % 30) -1
+                spot = plot[i]
+                
+                if spot == '#':
+                    counter += 1
+                else:
+                    continue
+            else:
+                spot = plot[i]
+                if spot == '#':
+                    counter += 1
+                else:
+                    continue
+            
+    return counter

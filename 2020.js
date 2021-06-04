@@ -68,3 +68,8 @@ function makeList(pwords) {
       }
     return validCounter;
   };
+
+
+  // Part 2
+
+  
