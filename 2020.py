@@ -113,3 +113,20 @@ def count_trees(map):
                     counter += 1
             
     return counter
+    
+# < Improved version of pt 1 >
+def count_trees(map):
+    map = map.split('\n')
+    counter = 0
+    i = 3
+
+    for plot in map[1:]:
+
+        if plot[i] == '#':
+            counter += 1
+        i += 3
+
+        if i > (len(plot)-1):
+            i = (int(i) % (len(plot)-1)) -1
+
+    return counter
