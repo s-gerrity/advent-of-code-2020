@@ -168,3 +168,42 @@ def count_trees(map):
             i = (int(i) % (len(plot)-1)) -1
             
     return counter
+
+# DAY 4 
+# Part 1
+
+def is_valid_passport(passport_dict):
+
+    if len(passport_dict) == 8:
+        return True
+    if len(passport_dict) == 7 and 'cid' not in passport_dict:
+        return True
+    return False
+
+
+def process_passport_string(passport_string):
+    passport_dict = {}
+    passport_items_list = passport_string.split() 
+
+    for item in passport_items_list:
+
+        data_pair = item.split(':')
+        passport_dict[data_pair[0]] = data_pair[1]
+    
+    return passport_dict
+
+
+def process_batch_file(string):
+    passport_list = string.split('\n\n')
+    valid_passports = 0
+
+    for passport_string in passport_list:
+        passport_dict = process_passport_string(passport_string)
+        is_valid = is_valid_passport(passport_dict)
+        
+        if is_valid == True:
+            valid_passports += 1
+            
+    return valid_passports
+    
+# process_batch_file(str_of_credentials)
