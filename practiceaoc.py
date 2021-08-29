@@ -254,9 +254,9 @@ def is_byr_valid(passport_dict):
     byr_value = passport_dict['byr']
     
     #check to see if the value is all integers
-    valid_byr_value = is_valid_string(byr_value, 'byr')
+    string_validity = is_valid_string(byr_value, 'byr')
     
-    if valid_byr_value == True:
+    if string_validity == True:
 
         if int(byr_value) >= 1920 and int(byr_value) <= 2002:
             return is_iyr_valid(passport_dict)
