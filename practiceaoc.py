@@ -176,8 +176,12 @@ def is_ecl_valid(passport_dict):
     # ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
     ecl_value = passport_dict['ecl']
     list_of_ecl = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+
     
-    return ecl_value in list_of_ecl
+    if ecl_value not in list_of_ecl:
+        return print(False, "'ecl' needs to be one of ''amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth''")
+    
+    return True
 
 
 def is_hcl_valid(passport_dict):
@@ -192,7 +196,7 @@ def is_hcl_valid(passport_dict):
             for item in hcl_remaining:
                 if item not in valid_chars:
                     return print(False, "'hcl' has incorrect values. Must have exactly six characters 0-9 or a-f following the # symbol.")
-            return True
+            return is_ecl_valid(passport_dict)
         return print(False, "'hcl' is too short. The # symbol needs to be followed by exactly six characters 0-9 or a-f.")
     return print(False, "'hcl' needs to start with a # symbol.")
 
@@ -309,7 +313,7 @@ def process_batch_file(string):
     return print("TOTAL:", valid_passports)
 
 
-str_of_credentials = """ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+str_of_credentials = """ecl:blu pid:860033327 eyr:2020 hcl:#fffffd
 byr:1937 iyr:2018 cid:147 hgt:70in"""   
     
 # First and starting function call to confirm passports
