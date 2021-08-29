@@ -190,9 +190,9 @@ def is_hcl_valid(passport_dict):
     if hcl_num_start == '#'and len(hcl_remaining) == 6:
         for item in hcl_remaining:
             if item not in valid_chars:
-                return print("INVALID 1")
-        return print("VALID YES")
-    return print("LEN WRONG")
+                return print(False, "'hcl' must have exactly six characters 0-9 or a-f following the first character.")
+        return True
+    return print(False, "'hcl' does not have enough characters. Needs a # followed by exactly six characters 0-9 or a-f.")
 
 #################################################################
 
