@@ -191,6 +191,7 @@ def is_hcl_valid(passport_dict):
         return print("VALID YES")
     return print("LEN WRONG")
 
+#################################################################
 
 def is_hgt_valid(passport_dict):
     hgt_metric = passport_dict['hgt'][-2:]
@@ -198,26 +199,24 @@ def is_hgt_valid(passport_dict):
     # print(hgt_metric, hgt_num)
     
     if len(passport_dict['hgt']) < 4:
-        return print(False, "4")
+        return print(False, "'hgt' must have two numbers followed by unit 'cm' or 'in'.")
     
     if hgt_metric != 'in' and hgt_metric != 'cm':
-        return False
+        return print(False, "Height unit incorrect. 'hgt' needs to be inches or centemeters.")
     
     if hgt_metric == 'cm':
         if int(hgt_num) < 150 or int(hgt_num) > 193:
-            return print(False, "2")
+            return print(False, "Must have a height between 150cm and 193cm.")
     if hgt_metric == 'in':
         if int(hgt_num) < 59 or int(hgt_num) > 76:
-            return print(False, "3")
-    return True
-
-#################################################################
+            return print(False, "Must have a height between 59in and 76in.")
+    return is_hcl_valid(passport_dict)
 
 
 def is_eyr_valid(passport_dict):
     eyr_value = passport_dict['eyr']
     if int(eyr_value) >= 2020 and int(eyr_value) <= 2030:
-        return print("EYR True")
+        return is_hgt_valid(passport_dict)
     return print("Invalid EYR")
 
 
@@ -296,11 +295,11 @@ def process_batch_file(string):
         if is_valid == True:
             valid_passports += 1
             
-    return print("TOTAL", valid_passports)
+    return print("TOTAL:", valid_passports)
 
 
 str_of_credentials = """ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
-byr:1937 iyr:2018 cid:147 hgt:183cm"""   
+byr:1937 iyr:2018 cid:147 hgt:44in"""   
     
 # First and starting function call to confirm passports
 process_batch_file(str_of_credentials)
