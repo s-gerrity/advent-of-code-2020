@@ -163,25 +163,30 @@
 ## PASSPORT DETAILS FUNCTIONS
 #true, false (len), true, false (len)
 
+#################################################################
 
 
 def is_pid_valid(passport_dict):
     # pid (Passport ID) - a nine-digit number, including leading zeroes.
     pid_value = passport_dict['pid']
 
-    return len(pid_value) == 9
-            
+    if len(pid_value) != 9:
+        return print(False, "'pid' must have 9 characters.")
+
+    string_validity = is_valid_string(pid_value, 'pid')
+    if string_validity == True:
+        return True
+                    
 
 def is_ecl_valid(passport_dict):
     # ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
     ecl_value = passport_dict['ecl']
     list_of_ecl = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
 
-    
     if ecl_value not in list_of_ecl:
         return print(False, "'ecl' needs to be one of ''amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth''")
     
-    return True
+    return is_pid_valid(passport_dict)
 
 
 def is_hcl_valid(passport_dict):
@@ -200,7 +205,6 @@ def is_hcl_valid(passport_dict):
         return print(False, "'hcl' is too short. The # symbol needs to be followed by exactly six characters 0-9 or a-f.")
     return print(False, "'hcl' needs to start with a # symbol.")
 
-#################################################################
 
 def is_hgt_valid(passport_dict):
     # hgt (Height) - a number followed by either cm or in:
@@ -209,7 +213,6 @@ def is_hgt_valid(passport_dict):
 
     hgt_metric = passport_dict['hgt'][-2:]
     hgt_num = passport_dict['hgt'][:-2]
-    # print(hgt_metric, hgt_num)
     
     if len(passport_dict['hgt']) < 4:
         return print(False, "'hgt' must have two numbers followed by unit 'cm' or 'in'.")
@@ -220,9 +223,11 @@ def is_hgt_valid(passport_dict):
     if hgt_metric == 'cm':
         if int(hgt_num) < 150 or int(hgt_num) > 193:
             return print(False, "Must have a height between 150cm and 193cm.")
+
     if hgt_metric == 'in':
         if int(hgt_num) < 59 or int(hgt_num) > 76:
             return print(False, "Must have a height between 59in and 76in.")
+
     return is_hcl_valid(passport_dict)
 
 
@@ -249,7 +254,7 @@ def is_byr_valid(passport_dict):
     byr_value = passport_dict['byr']
     
     #check to see if the value is all integers
-    valid_byr_value = is_valid_string(byr_value)
+    valid_byr_value = is_valid_string(byr_value, 'byr')
     
     if valid_byr_value == True:
 
@@ -261,11 +266,11 @@ def is_byr_valid(passport_dict):
 ### SUPPORTING FUNCTION
 
 
-def is_valid_string(passport_value):
+def is_valid_string(passport_value, key):
     
     for item in passport_value:
         if item not in '1234567890':
-            return print(False, "Passport is not valid because " + item + " characters are not numerical for " + passport_value)
+            return print(False, "Passport is not valid because the " + key + " : " + passport_value + " needs to have numerical characters.")
 
     return True
     
@@ -313,7 +318,7 @@ def process_batch_file(string):
     return print("TOTAL:", valid_passports)
 
 
-str_of_credentials = """ecl:blu pid:860033327 eyr:2020 hcl:#fffffd
+str_of_credentials = """ecl:blu pid:86333327 eyr:2020 hcl:#fffffd
 byr:1937 iyr:2018 cid:147 hgt:70in"""   
     
 # First and starting function call to confirm passports
