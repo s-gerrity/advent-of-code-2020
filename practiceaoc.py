@@ -1,7 +1,6 @@
+# day 4
 
 
-str_of_credentials = """ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
-byr:1937 iyr:2017 cid:147 hgt:183cm"""
 
 # iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
 # hcl:#cfa07d byr:1929
@@ -145,19 +144,19 @@ byr:1937 iyr:2017 cid:147 hgt:183cm"""
 
 
 
-str_of_credentials = """ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
-byr:19a7 iyr:2017 cid:147 hgt:183cm
+# str_of_credentials = """ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+# byr:19a7 iyr:2017 cid:147 hgt:183cm
 
-iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
-hcl:#cfa07d byr:1929
+# iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+# hcl:#cfa07d byr:1929
 
-hcl:#ae17e1 iyr:2013
-eyr:2024
-ecl:brn pid:760753108 byr:1931
-hgt:179cm
+# hcl:#ae17e1 iyr:2013
+# eyr:2024
+# ecl:brn pid:760753108 byr:1931
+# hgt:179cm
 
-hcl:#cfa07d eyr:2025 pid:166559648
-iyr:2011 ecl:brn hgt:59in"""
+# hcl:#cfa07d eyr:2025 pid:166559648
+# iyr:2011 ecl:brn hgt:59in"""
 
 
 
@@ -212,23 +211,22 @@ def is_hgt_valid(passport_dict):
             return print(False, "3")
     return True
 
+#################################################################
+
 
 def is_eyr_valid(passport_dict):
     eyr_value = passport_dict['eyr']
     if int(eyr_value) >= 2020 and int(eyr_value) <= 2030:
         return print("EYR True")
     return print("Invalid EYR")
-    
+
 
 def is_iyr_valid(passport_dict):
     iyr_value = passport_dict['iyr']
     
     if int(iyr_value) >= 2010 and int(iyr_value) <= 2020:
-        return print("IYR True")
+        return is_eyr_valid(passport_dict)
     return print("Invalid IYR")
-
-    
-#################################################################
 
 
 def is_byr_valid(passport_dict):
@@ -241,7 +239,7 @@ def is_byr_valid(passport_dict):
     if valid_byr_value == True:
 
         if int(byr_value) >= 1920 and int(byr_value) <= 2002:
-            return True
+            return is_iyr_valid(passport_dict)
     return print(False, "Invalid BYR")
 
 
@@ -254,7 +252,7 @@ def is_valid_string(passport_value):
         if item not in '1234567890':
             return False
 
-    # return print(False, "INVALID STRING")
+    return True
     
 
 
@@ -299,8 +297,12 @@ def process_batch_file(string):
             valid_passports += 1
             
     return print("TOTAL", valid_passports)
+
+
+str_of_credentials = """ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+byr:1937 iyr:2018 cid:147 hgt:183cm"""   
     
-    
+# First and starting function call to confirm passports
 process_batch_file(str_of_credentials)
 
 

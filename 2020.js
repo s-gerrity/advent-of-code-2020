@@ -1,4 +1,5 @@
 // js version of py functions for practice
+// final working solutions
 
 // DAY 1
 // Part 1
