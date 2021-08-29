@@ -225,9 +225,10 @@ def is_hgt_valid(passport_dict):
 def is_eyr_valid(passport_dict):
     # eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
     eyr_value = passport_dict['eyr']
+
     if int(eyr_value) >= 2020 and int(eyr_value) <= 2030:
         return is_hgt_valid(passport_dict)
-    return print("Invalid EYR")
+    return print(False, "'eyr' must be a year between 2019 and 2031.")
 
 
 def is_iyr_valid(passport_dict):
@@ -236,21 +237,21 @@ def is_iyr_valid(passport_dict):
     
     if int(iyr_value) >= 2010 and int(iyr_value) <= 2020:
         return is_eyr_valid(passport_dict)
-    return print("Invalid IYR")
+    return print(False, "'iyr' must be a year between 2009 and 2021.")
 
 
 def is_byr_valid(passport_dict):
     #byr (Birth Year) - four digits; at least 1920 and at most 2002.
     byr_value = passport_dict['byr']
     
-    #check to see if it's all integers
+    #check to see if the value is all integers
     valid_byr_value = is_valid_string(byr_value)
     
     if valid_byr_value == True:
 
         if int(byr_value) >= 1920 and int(byr_value) <= 2002:
             return is_iyr_valid(passport_dict)
-    return print(False, "Invalid BYR")
+    return print(False, "'byr' must be a year between 1919 and 2003.")
 
 
 ### SUPPORTING FUNCTION
@@ -260,11 +261,10 @@ def is_valid_string(passport_value):
     
     for item in passport_value:
         if item not in '1234567890':
-            return False
+            return print(False, "Passport is not valid because " + item + " characters are not numerical for " + passport_value)
 
     return True
     
-
 
 ### MAIN FUNCTIONS
 
