@@ -187,12 +187,14 @@ def is_hcl_valid(passport_dict):
     hcl_remaining = hcl_value[1:]
     valid_chars = 'abcdef1234567890'
     
-    if hcl_num_start == '#'and len(hcl_remaining) == 6:
-        for item in hcl_remaining:
-            if item not in valid_chars:
-                return print(False, "'hcl' must have exactly six characters 0-9 or a-f following the first character.")
-        return True
-    return print(False, "'hcl' does not have enough characters. Needs a # followed by exactly six characters 0-9 or a-f.")
+    if hcl_num_start == '#':
+        if len(hcl_remaining) == 6:
+            for item in hcl_remaining:
+                if item not in valid_chars:
+                    return print(False, "'hcl' has incorrect values. Must have exactly six characters 0-9 or a-f following the # symbol.")
+            return True
+        return print(False, "'hcl' is too short. The # symbol needs to be followed by exactly six characters 0-9 or a-f.")
+    return print(False, "'hcl' needs to start with a # symbol.")
 
 #################################################################
 
@@ -308,7 +310,7 @@ def process_batch_file(string):
 
 
 str_of_credentials = """ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
-byr:1937 iyr:2018 cid:147 hgt:44in"""   
+byr:1937 iyr:2018 cid:147 hgt:70in"""   
     
 # First and starting function call to confirm passports
 process_batch_file(str_of_credentials)
