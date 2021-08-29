@@ -166,12 +166,14 @@
 
 
 def is_pid_valid(passport_dict):
+    # pid (Passport ID) - a nine-digit number, including leading zeroes.
     pid_value = passport_dict['pid']
 
     return len(pid_value) == 9
             
 
 def is_ecl_valid(passport_dict):
+    # ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
     ecl_value = passport_dict['ecl']
     list_of_ecl = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
     
@@ -179,6 +181,7 @@ def is_ecl_valid(passport_dict):
 
 
 def is_hcl_valid(passport_dict):
+    # hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
     hcl_value = passport_dict['hcl']
     hcl_num_start = hcl_value[0]
     hcl_remaining = hcl_value[1:]
@@ -194,6 +197,10 @@ def is_hcl_valid(passport_dict):
 #################################################################
 
 def is_hgt_valid(passport_dict):
+    # hgt (Height) - a number followed by either cm or in:
+    # If cm, the number must be at least 150 and at most 193.
+    # If in, the number must be at least 59 and at most 76.
+
     hgt_metric = passport_dict['hgt'][-2:]
     hgt_num = passport_dict['hgt'][:-2]
     # print(hgt_metric, hgt_num)
@@ -214,6 +221,7 @@ def is_hgt_valid(passport_dict):
 
 
 def is_eyr_valid(passport_dict):
+    # eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
     eyr_value = passport_dict['eyr']
     if int(eyr_value) >= 2020 and int(eyr_value) <= 2030:
         return is_hgt_valid(passport_dict)
@@ -221,6 +229,7 @@ def is_eyr_valid(passport_dict):
 
 
 def is_iyr_valid(passport_dict):
+    # iyr (Issue Year) - four digits; at least 2010 and at most 2020.
     iyr_value = passport_dict['iyr']
     
     if int(iyr_value) >= 2010 and int(iyr_value) <= 2020:
