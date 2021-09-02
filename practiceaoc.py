@@ -70,6 +70,7 @@ def find_row_and_column(locator_command):
 def get_seat_id(row_and_column_list):
     seat_id = (row_and_column_list[0] * 8) + row_and_column_list[1]
 
+    print(seat_id)
     return seat_id
 
 
@@ -102,9 +103,9 @@ def run_test(testValue, expectedResult, description):
 # run_test(find_row_and_column('BBFFBBFRLL'), [102, 4], "Checking for row and column")
 
 
-run_test(get_seat_id('BFFFBBFRRR'), [567], "Get seat ID")
-run_test(get_seat_id('BFFFBBFRRR'), [119], "Get seat ID")
-run_test(get_seat_id('BFFFBBFRRR'), [820], "Get seat ID")
+run_test(find_row_and_column('BFFFBBFRRR'), 567, "Get seat ID")
+run_test(find_row_and_column('FFFBBBFRRR'), 119, "Get seat ID")
+run_test(find_row_and_column('BBFFBBFRLL'), 820, "Get seat ID")
 
 
 # pseudocode:
