@@ -1,43 +1,59 @@
 # day 5 practice
 import math
 
+
 def find_row(row_locator):
-    max_rows = 127
     min_rows = 0
+    max_rows = 127
     rows_range = [min_rows, max_rows]
     range_between_rows = max_rows - min_rows
-
-
     i = 0
+
     while i < len(row_locator):
         for indicator in row_locator:
             if indicator == 'F':
-                max_rows = math.floor((min_rows + (math.floor(range_between_rows) / 2)))
-                print(max_rows, "F max_rows") # 63
-                i += 1
+                max_rows = math.floor((min_rows + (range_between_rows) / 2))
+                # print(max_rows, "F max_rows") # 63
                 rows_range = [min_rows, max_rows]
-                print(rows_range, "rows_range inside loop")
-                range_between_rows = math.floor(max_rows - min_rows)
-                print(range_between_rows, "range_between_rows updated inside loop")
-  
-
-
-            if indicator == 'B': 
-                min_rows = math.ceil((max_rows - (math.floor(range_between_rows) / 2))) # 127 - (63 / 2) = 96
-                print(min_rows, "min_rows") # 96
+                # print(rows_range, "rows_range inside loop")
+                range_between_rows = max_rows - min_rows
+                # print(range_between_rows, "range_between_rows updated inside loop")
                 i += 1
-                rows_range = [min_rows, max_rows]
-                range_between_rows = math.floor(max_rows - min_rows)
 
-                print(range_between_rows, "range_between_rows SECOND time", rows_range, "rows range in loop") 
-        # print(rows_range, "rows_range at the exit")
+            elif indicator == 'B': 
+                min_rows = math.ceil((max_rows - (range_between_rows) / 2)) # 127 - (63 / 2) = 96
+                # print(min_rows, "min_rows") # 96
+                rows_range = [min_rows, max_rows]
+                range_between_rows = max_rows - min_rows
+                # print(range_between_rows, "range_between_rows SECOND time", rows_range, "rows range in loop") 
+                i += 1
+
         return rows_range
 
-def find_column():
-    max_column = 7
-    min_column = 0
-    columns_range = [min_column, max_column]
-    range_between_columns = max_column - min_column
+
+def find_column(column_locator):
+    min_columns = 0
+    max_columns = 7
+    columns_range = [min_columns, max_columns]
+    range_between_columns = max_columns - min_columns
+    i = 0
+
+    while i < len(column_locator):
+        for indicator in column_locator:
+            if indicator == 'L':
+                max_columns = math.floor(min_columns + (range_between_columns / 2))
+                columns_range = [min_columns, max_columns]
+                range_between_columns = max_columns - min_columns
+                i += 1
+
+            elif indicator == 'R':
+                min_columns = math.ceil(max_columns - (range_between_columns / 2))
+                columns_range = [min_columns, max_columns]
+                range_between_columns = max_columns - min_columns
+                i += 1
+            
+        return columns_range
+
 
 
 def run_test(testValue, expectedResult, description):
@@ -57,9 +73,9 @@ run_test(find_row('FFFBBBF'), [14, 14], "F one digit sample of finding a 7 comma
 run_test(find_row('BBFFBBF'), [102, 102], "Two digit sample of finding a 7 command row")
 
 
-run_test(find_column('L'), [0, 3], "R one digit sample of finding a 3 command column")
-run_test(find_column('R'), [4, 7], "L one digit sample of finding a 3 command column") 
-run_test(find_column('RR'), [6, 7], "Check first sample of finding a 3 command column")
+# run_test(find_column('L'), [0, 3], "R one digit sample of finding a 3 command column")
+# run_test(find_column('R'), [4, 7], "L one digit sample of finding a 3 command column") 
+# run_test(find_column('RR'), [6, 7], "Check first sample of finding a 3 command column")
 
 
 
