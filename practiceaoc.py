@@ -154,6 +154,7 @@ class Node:
         # prevents duplicate data from being added
         if self.value == data:
             return print(False, "this " + data + " cannot be added more than once")
+
         # check if the data being added is less than the current node
         elif self.value > data:
             if self.leftChild:
@@ -176,7 +177,21 @@ class Node:
     # it will return true
     def find(self, data):
         if(self.value == data):
-            return True
+            return print(True)
+        #check if left child exists, if it does, check the data in find
+        elif self.value > data:
+            if self.leftChild:
+                return self.leftChild.find(data)
+            # if it doesnt exist, return false
+            else:
+                return print(False, data + " does not exist in tree.")
+        # if the data we want to search is greater than the current node, search
+        # the right child
+        else:    
+            if self.rightChild:
+                return self.rightChild.find(data)
+            else:
+                return print(False, data + " does not exist in tree.")
 
 # main interface for the user
 class Tree:
@@ -193,20 +208,29 @@ class Tree:
         else:
             # if the root node does not exist we will create a root node
             self.root = Node(data)
-            return True
+            return print(True, "hi")
 
+    # check to see if the root exists already
     def find(self, data):
         if self.root:
+            # if there is a root node it calls the find function on the root node in the node class
             return self.root.find(data)
         else:
-            return False
+            # if there is no root node then we know the data is not in the tree and can return false
+            return print(False, data + " is not in the tree.")
 
 
 
 bst = Tree()
-bst.insert(14)
+print(bst.insert(14))
 
-
+self.value = 63
+for item in string:
+    # check if the data being added is less than the current node
+    # "F" stands for "front", first half of value divided in half
+    if item == 'F':
+        self.value = value / 2
+        insert(self.value)
 
 
 
