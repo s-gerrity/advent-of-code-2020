@@ -1,11 +1,11 @@
 # day 5 practice
 import math
 
-def find_rows(row_locator):
+def find_row(row_locator):
     max_rows = 127
     min_rows = 0
     rows_range = [min_rows, max_rows]
-    range_between_rows = (max_rows - min_rows)
+    range_between_rows = max_rows - min_rows
 
 
     i = 0
@@ -32,11 +32,12 @@ def find_rows(row_locator):
                 print(range_between_rows, "range_between_rows SECOND time", rows_range, "rows range in loop") 
         # print(rows_range, "rows_range at the exit")
         return rows_range
-                
 
-# pseudocode:
-# take the max and update it by diving the num of rows between items in list by 2 and minusing from max
-
+def find_column():
+    max_column = 7
+    min_column = 0
+    columns_range = [min_column, max_column]
+    range_between_columns = max_column - min_column
 
 
 def run_test(testValue, expectedResult, description):
@@ -47,13 +48,18 @@ def run_test(testValue, expectedResult, description):
         print('    ❌ Test failed!')
 
 
-run_test(find_rows('FBFBBFF'), [44, 44], "Check first sample of finding a 7 command row")
-run_test(find_rows('B'), [64, 127], "B one digit sample of finding a 7 command row")
-run_test(find_rows('F'), [0, 63], "F one digit sample of finding a 7 command row") 
-run_test(find_rows('BB'), [96, 127], "Two digit sample of finding a 7 command row")
-run_test(find_rows('BFFFBBF'), [70, 70], "B one digit sample of finding a 7 command row")
-run_test(find_rows('FFFBBBF'), [14, 14], "F one digit sample of finding a 7 command row") 
-run_test(find_rows('BBFFBBF'), [102, 102], "Two digit sample of finding a 7 command row")
+run_test(find_row('FBFBBFF'), [44, 44], "Check first sample of finding a 7 command row")
+run_test(find_row('B'), [64, 127], "B one digit sample of finding a 7 command row")
+run_test(find_row('F'), [0, 63], "F one digit sample of finding a 7 command row") 
+run_test(find_row('BB'), [96, 127], "Two digit sample of finding a 7 command row")
+run_test(find_row('BFFFBBF'), [70, 70], "B one digit sample of finding a 7 command row")
+run_test(find_row('FFFBBBF'), [14, 14], "F one digit sample of finding a 7 command row") 
+run_test(find_row('BBFFBBF'), [102, 102], "Two digit sample of finding a 7 command row")
+
+
+run_test(find_column('L'), [0, 3], "R one digit sample of finding a 3 command column")
+run_test(find_column('R'), [4, 7], "L one digit sample of finding a 3 command column") 
+run_test(find_column('RR'), [6, 7], "Check first sample of finding a 3 command column")
 
 
 
