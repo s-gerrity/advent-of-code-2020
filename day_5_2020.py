@@ -3,8 +3,39 @@
 
 import math
 
-SEAT_ID_LIST = []
 
+# Checks all seat ids in file to locate the highest seat id number
+def find_max_row_and_column(file_of_commands):
+    
+    locator_command = file_of_commands.readlines()
+    seat_ids = []
+
+    for command in locator_command:
+
+        # Splits each command by row or column, example: 'BFFFBBFRRR'
+        # row is 'BFFFBBF' and column is 'RRR'
+        row_command = command[:7]
+        column_command = command[7:]
+        row_and_column = []
+
+        row = find_row(row_command)
+        column = find_column(column_command)
+        row_and_column = [row, column]
+
+        # Transforms the row and column and puts its unique seat id into a list
+        seat_id = get_seat_id(row_and_column)
+        seat_ids.append(seat_id)
+
+    max_seat_id = max(seat_ids)
+
+    return print("The maximum seat id number is: " + str(max_seat_id))
+
+
+# @function find_row
+# Takes in a string of 'F' (for front) or 'B' (for back)
+# Returns: integer
+# Between 0 to 127, split the range in half. Use the first half or second 
+# depending if the command is F or B (front half 0 - 63 or back half 64 -127)
 def find_row(row_locator):
     min_rows = 0
     max_rows = 127
@@ -29,6 +60,11 @@ def find_row(row_locator):
         return rows_range[0]
 
 
+# @function column
+# Takes in a string of 'L' (for left) or 'R' (for right)
+# Returns: integer
+# Between 0 to 7, split the range in half. Use the first half or second 
+# depending if the command is F or B (left half 0 - 3 or right half 4 - 7)
 def find_column(column_locator):
     min_columns = 0
     max_columns = 7
@@ -53,29 +89,17 @@ def find_column(column_locator):
         return columns_range[0]
 
 
-def find_row_and_column(command):
-
-    row_command = command[:7]
-    column_command = command[7:]
-    row_and_column = []
-
-    row = find_row(row_command)
-    column = find_column(column_command)
-    row_and_column = [row, column]
-    seat_id = get_seat_id(row_and_column)
-    # SEAT_ID_LIST.append(seat_id)
-
-    # max_seat_id = max(SEAT_ID_LIST)
-    # print(SEAT_ID_LIST)
-    # print(seat_id, "seat id")
-    return seat_id
-
-
+# Function get_seat_id
+# Takes in a list
+# Returns an integer
+# Multiply the row by 8 and add the column to get the seat id
 def get_seat_id(row_and_column_list):
     seat_id = (row_and_column_list[0] * 8) + row_and_column_list[1]
 
     return seat_id
 
+
+######### Function for running tests
 
 def run_test(testValue, expectedResult, description):
     print(description)
@@ -84,6 +108,8 @@ def run_test(testValue, expectedResult, description):
     else:
         print('    ❌ Test failed!')
 
+
+############## Tests to confirm row function separately
 
 # run_test(find_row('FBFBBFF'), [44, 44], "Check first sample of finding a 7 command row")
 # run_test(find_row('B'), [64, 127], "B one digit sample of finding a 7 command row")
@@ -94,6 +120,8 @@ def run_test(testValue, expectedResult, description):
 # run_test(find_row('BBFFBBF'), [102, 102], "Two digit sample of finding a 7 command row")
 
 
+##################### Test to confirm column function separately 
+
 # run_test(find_column('L'), [0, 3], "R one digit sample of finding a 3 command column")
 # run_test(find_column('R'), [4, 7], "L one digit sample of finding a 3 command column") 
 # run_test(find_column('RR'), [6, 7], "Check first sample of finding a 3 command column")
@@ -101,26 +129,20 @@ def run_test(testValue, expectedResult, description):
 # run_test(find_column('RLL'), [4, 4], "Three digit sample of finding a 3 command column")
 
 
-# run_test(find_row_and_column('BFFFBBFRRR'), [70, 7], "Checking for row and column")
-# run_test(find_row_and_column('FFFBBBFRRR'), [14, 7], "Checking for row and column") 
-# run_test(find_row_and_column('BBFFBBFRLL'), [102, 4], "Checking for row and column")
+################### Test to check combo row and column 
+
+# run_test(find_max_row_and_column('BFFFBBFRRR'), [70, 7], "Checking for row and column")
+# run_test(find_max_row_and_column('FFFBBBFRRR'), [14, 7], "Checking for row and column") 
+# run_test(find_max_row_and_column('BBFFBBFRLL'), [102, 4], "Checking for row and column")
 
 
-# run_test(find_row_and_column('BFFFBBFRRR'), 567, "Get seat ID")
-# run_test(find_row_and_column('FFFBBBFRRR'), 119, "Get seat ID")
-# run_test(find_row_and_column('BBFFBBFRLL'), 820, "Get seat ID")
-# run_test(find_row_and_column(['FFFFBFFLLL',
-# 'FFFFBFBLLL',
-# 'FFFFBFBLLR',
-# 'FFFFBFFLLR',
-# 'FFFFBFFLRL',
-# 'FFFFBFBLRL',
-# 'FFFFBFFLRR',
-# 'FFFFBFBLRR']), [32, 32, 33, 33, 34, 34, 35, 35], "Get seat ID")
-# run_test(find_row_and_column(['FFFFBFBLLL']), [32], "Get seat ID")
+################# Edit find_row_and_column arg input and loop to test retrieving seat ids
 
-print(find_row_and_column('FFFFBFFLLL'))
-print(find_row_and_column('FFFFBFBLLL'))
-print(find_row_and_column('FFFFBFBLLR'))
-print(find_row_and_column('FFFFBFFLLR'))
+# run_test(find_max_row_and_column('BFFFBBFRRR'), 567, "Get seat ID")
+# run_test(find_max_row_and_column('FFFBBBFRRR'), 119, "Get seat ID")
+# run_test(find_max_row_and_column('BBFFBBFRLL'), 820, "Get seat ID")
 
+
+f = open("day_5_datafile.txt", "r")
+
+find_max_row_and_column(f)
