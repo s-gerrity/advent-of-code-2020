@@ -191,25 +191,25 @@ def find_my_seat(file_of_commands):
 # For columns: Between 0 to 7 for columns, split the range in half. If indicator in string is 'L' (for left) 
 # use the first half of nums, for 'R' (for right) use the second half (for example: front half 0 - 3 or back half 4 - 7)
 def find_row_or_column(command_locator, min_amount, max_amount):
-    rows_range = [min_amount, max_amount]
-    range_between_rows = max_amount - min_amount
+    seat_parameters = [min_amount, max_amount]
+    range_between_parameters = max_amount - min_amount
     i = 0
 
     while i <= len(command_locator):
         for indicator in command_locator:
             if indicator == 'F' or indicator == 'L':
-                max_amount = math.floor((min_amount + (range_between_rows) / 2))
-                rows_range = [min_amount, max_amount]
-                range_between_rows = max_amount - min_amount
+                max_amount = math.floor((min_amount + (range_between_parameters) / 2))
+                seat_parameters = [min_amount, max_amount]
+                range_between_parameters = max_amount - min_amount
                 i += 1
 
             elif indicator == 'B' or indicator == 'R':
-                min_amount = math.ceil((max_amount - (range_between_rows) / 2))
-                rows_range = [min_amount, max_amount]
-                range_between_rows = max_amount - min_amount
+                min_amount = math.ceil((max_amount - (range_between_parameters) / 2))
+                seat_parameters = [min_amount, max_amount]
+                range_between_parameters = max_amount - min_amount
                 i += 1
 
-        return rows_range[0]
+        return seat_parameters[0]
 
 
 # Function get_seat_id
