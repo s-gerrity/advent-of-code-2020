@@ -10,7 +10,7 @@ def find_row(row_locator):
     range_between_rows = max_rows - min_rows
     i = 0
 
-    while i < len(row_locator):
+    while i <= len(row_locator):
         for indicator in row_locator:
             if indicator == 'F':
                 max_rows = math.floor((min_rows + (range_between_rows) / 2))
@@ -34,7 +34,7 @@ def find_column(column_locator):
     range_between_columns = max_columns - min_columns
     i = 0
 
-    while i < len(column_locator):
+    while i <= len(column_locator):
         for indicator in column_locator:
             if indicator == 'L':
                 max_columns = math.floor(
