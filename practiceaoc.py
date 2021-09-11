@@ -68,16 +68,19 @@ def find_row_and_column(file_of_commands):
         row_and_column = [row, column]
         seat_id = get_seat_id(row_and_column)
         seat_ids.append(seat_id)
+        print(seat_ids, "first")
+    print(seat_ids, "first")
 
+    # seat_ids.sort()
     # filled_seats = find_my_seat(seat_ids)
     # my_seat_lst = check_lst_values(filled_seats)
-    max_seat_id = seat_ids.count()
-    return max_seat_id
+    return seat_ids
 
 
 def get_seat_id(row_and_column_list):
 
     seat_id = (row_and_column_list[0] * 8) + row_and_column_list[1]
+    
 
     return seat_id
 
@@ -124,38 +127,7 @@ def check_lst_values(filled_seats):
 # seat id in middle of pack with a seat on each side is mine
 
 
-def run_test(testValue, expectedResult, description):
-    print(description)
-    if (testValue == expectedResult):
-        print('    ✅ Test passed')
-    else:
-        print('    ❌ Test failed!')
 
-
-# # run_test(find_row('FBFBBFF'), [44, 44], "Check first sample of finding a 7 command row")
-# # run_test(find_row('B'), [64, 127], "B one digit sample of finding a 7 command row")
-# # run_test(find_row('F'), [0, 63], "F one digit sample of finding a 7 command row")
-# # run_test(find_row('BB'), [96, 127], "Two digit sample of finding a 7 command row")
-# # run_test(find_row('BFFFBBF'), [70, 70], "B one digit sample of finding a 7 command row")
-# # run_test(find_row('FFFBBBF'), [14, 14], "F one digit sample of finding a 7 command row")
-# # run_test(find_row('BBFFBBF'), [102, 102], "Two digit sample of finding a 7 command row")
-
-
-# # run_test(find_column('L'), [0, 3], "R one digit sample of finding a 3 command column")
-# # run_test(find_column('R'), [4, 7], "L one digit sample of finding a 3 command column")
-# # run_test(find_column('RR'), [6, 7], "Check first sample of finding a 3 command column")
-# # run_test(find_column('RRR'), [7, 7], "Two digit sample of finding a 3 command column")
-# # run_test(find_column('RLL'), [4, 4], "Three digit sample of finding a 3 command column")
-
-
-# # run_test(find_row_and_column('BFFFBBFRRR'), [70, 7], "Checking for row and column")
-# # run_test(find_row_and_column('FFFBBBFRRR'), [14, 7], "Checking for row and column")
-# # run_test(find_row_and_column('BBFFBBFRLL'), [102, 4], "Checking for row and column")
-
-
-# run_test(find_row_and_column('BFFFBBFRRR'), 567, "Get seat ID")
-# run_test(find_row_and_column('FFFBBBFRRR'), 119, "Get seat ID")
-# run_test(find_row_and_column('BBFFBBFRLL'), 820, "Get seat ID")
 
 f = open("day_5_datafile.txt", "r")
 
