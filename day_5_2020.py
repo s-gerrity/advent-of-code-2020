@@ -154,7 +154,7 @@ find_max_row_and_column(f)
 
 
 # Checks all seats to locate my seat id
-def find_row_and_column(file_of_commands):
+def find_my_seat(file_of_commands):
     locator_command = file_of_commands.readlines()
     seat_ids = []
 
@@ -270,7 +270,7 @@ def check_lst_values(filled_seats):
         # Get the seat id (the value, not index) of the one that comes before it
         current_seat_id_minus_one = filled_seats[current_id_index-1]
         
-        # If seat id getting checked is preceeded by a value that is two less,
+        # If seat id getting checked is preceded by a value that is two less,
         # for example 53 is two less than 55, than the num in between will be my seat
         if current_seat_id_minus_one == value_of_current_seat_id_minus_two: 
             
@@ -283,6 +283,6 @@ def check_lst_values(filled_seats):
 
 f = open("day_5_datafile.txt", "r")
 
-find_row_and_column(f)
+find_my_seat(f)
 
 
