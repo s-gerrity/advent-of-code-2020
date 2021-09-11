@@ -37,15 +37,13 @@ def find_column(column_locator):
     while i <= len(column_locator):
         for indicator in column_locator:
             if indicator == 'L':
-                max_columns = math.floor(
-                min_columns + (range_between_columns / 2))
+                max_columns = math.floor(min_columns + (range_between_columns / 2))
                 columns_range = [min_columns, max_columns]
                 range_between_columns = max_columns - min_columns
                 i += 1
 
             elif indicator == 'R':
-                min_columns = math.ceil(
-                max_columns - (range_between_columns / 2))
+                min_columns = math.ceil(max_columns - (range_between_columns / 2))
                 columns_range = [min_columns, max_columns]
                 range_between_columns = max_columns - min_columns
                 i += 1
@@ -68,13 +66,10 @@ def find_row_and_column(file_of_commands):
         row_and_column = [row, column]
         seat_id = get_seat_id(row_and_column)
         seat_ids.append(seat_id)
-        print(seat_ids, "first")
-    print(seat_ids, "first")
 
-    # seat_ids.sort()
-    # filled_seats = find_my_seat(seat_ids)
-    # my_seat_lst = check_lst_values(filled_seats)
-    return seat_ids
+    filled_seats = find_my_seat(seat_ids)
+    my_seat_lst = check_lst_values(filled_seats)
+    return my_seat_lst
 
 
 def get_seat_id(row_and_column_list):
@@ -83,7 +78,6 @@ def get_seat_id(row_and_column_list):
     
 
     return seat_id
-
 
 
 def find_my_seat(seat_ids):
@@ -117,26 +111,10 @@ def check_lst_values(filled_seats):
 
 
     return lst_of_my_seats
- 
-# check_lst_values([5, 6, 7, 16, 17, 18, 19, 20, 21, 22, 23, 32, 33, 34, 35, 36, 37, 38, 39, 48, 49, 50, 51, 52, 53, 54, 55, 64, 65, 66, 67, 68, 69, 70, 71, 80, 81, 82, 83, 84, 85, 87, 96, 97, 98, 99, 100, 101, 102, 103, 112, 113, 114, 115, 116, 117, 118, 119, 128, 129, 130, 131, 132, 133, 134, 135, 144, 145, 146, 147, 148, 149, 150, 151, 160, 161, 162, 163, 164, 165, 166, 167, 176, 177, 178, 179, 180, 181, 182, 183, 192, 193, 194, 195, 196, 197, 198, 199, 208, 209, 210, 211, 212, 213, 214, 215, 224, 225, 226, 227, 228, 229, 230, 231, 240, 241, 242, 243, 244, 245, 246, 247, 256, 257, 258, 259, 260, 261, 262, 263, 272, 273, 274, 275, 276, 277, 278, 279, 288, 289, 290, 291, 292, 293, 294, 295, 304, 305, 306, 307, 308, 309, 310, 311, 320, 321, 322, 323, 324, 325, 326, 327, 336, 337, 338, 339, 340, 341, 342, 343, 352, 353, 354, 355, 356, 357, 358, 359, 368, 369, 370, 371, 372, 373, 374, 375, 384, 385, 386, 387, 388, 389, 390, 391, 400, 401, 402, 403, 404, 405, 406, 407, 416, 417, 418, 419, 420, 421, 422, 423, 432, 433, 434, 435, 436, 437, 438, 439, 448, 449, 450, 451, 452, 453, 454, 455, 464, 465, 466, 467, 468, 469, 470, 471, 480, 481, 482, 483, 484, 485, 486, 487, 496, 497, 498, 499, 500, 501, 502, 503, 512, 513, 514, 515, 516, 517, 518, 519, 528, 529, 530, 531, 532, 533, 534, 535, 544, 545, 546, 547, 548, 549, 550, 551, 560, 561, 562, 563, 564, 565, 566, 567, 576, 577, 578, 579, 580, 581, 582, 583, 592, 593, 594, 595, 596, 597, 598, 599, 608, 609, 610, 611, 612, 613, 614, 615, 624, 625, 626, 627, 628, 629, 630, 631, 640, 641, 642, 643, 644, 645, 646, 647, 656, 657, 658, 659, 660, 661, 662, 663, 672, 673, 674, 675, 676, 677, 678, 679, 688, 689, 690, 691, 692, 693, 694, 695, 704, 705, 706, 707, 708, 709, 710, 711, 720, 721, 722, 723, 724, 725, 726, 727, 736, 737, 738, 739, 740, 741, 742, 743, 752, 753, 754, 755, 756, 757, 758, 759, 768, 769, 770, 771, 772, 773, 774, 775, 784, 785, 786, 787, 788, 789, 790, 791, 800, 801, 802, 803, 804, 805, 806, 807, 816, 817, 818, 819, 820, 821, 822, 823, 832, 833, 834, 835, 836, 837, 838, 839, 848, 849, 850, 851, 852, 853, 854, 855, 864, 865, 866, 867, 868, 869, 870, 871])
-
-# make a list with all possible seat ids
-# make a list with all seat ids captured from project
-# if seat in total list is not also in project list, add to a list
-# seat id's at the beginning and end of list are irrelvent
-# seat id in middle of pack with a seat on each side is mine
-
-
 
 
 f = open("day_5_datafile.txt", "r")
 
 print(find_row_and_column(f))
 
-# # pseudocode:
-# # have a list with min rows max rows [min, max]
-# # for each item in the command
-# # check which command it is (front or back of rows)
-# # if its the back, divide the max rows to find the starting point of the range
-# # replace min rows with the new starting [min, max]
-# #
+

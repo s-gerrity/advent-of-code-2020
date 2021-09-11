@@ -11,29 +11,21 @@ def find_row(row_locator):
     rows_range = [min_rows, max_rows]
     range_between_rows = max_rows - min_rows
     i = 0
-    # print(row_locator, "row_locator")
+
     while i <= len(row_locator):
-        # print(len(row_locator), "len")
         for indicator in row_locator:
-            # print(indicator, "indicator")
             if indicator == 'F':
                 max_rows = math.floor((min_rows + (range_between_rows) / 2))
-                # print(max_rows, "F max_rows")
                 rows_range = [min_rows, max_rows]
-                # print(rows_range, "rows_range inside loop")
                 range_between_rows = max_rows - min_rows
-                # print(range_between_rows, "range_between_rows updated inside loop")
                 i += 1
 
             elif indicator == 'B': 
                 min_rows = math.ceil((max_rows - (range_between_rows) / 2)) 
-                # print(min_rows, "B min_rows") 
                 rows_range = [min_rows, max_rows]
-                # print(rows_range, "rows_range inside loop")
                 range_between_rows = max_rows - min_rows
-                # print(range_between_rows, "range_between_rows SECOND time", rows_range, "rows range in loop") 
                 i += 1
-        # print(rows_range[0], "rows_range[0]")
+
         return rows_range[0]
 
 
@@ -62,9 +54,6 @@ def find_column(column_locator):
 
 
 def find_row_and_column(command):
-    # locator_command = file_of_commands.readlines()
-
-    # for command in locator_command:
 
     row_command = command[:7]
     column_command = command[7:]
@@ -83,11 +72,9 @@ def find_row_and_column(command):
 
 
 def get_seat_id(row_and_column_list):
-    # print(row_and_column_list, "row_and_column_list")
     seat_id = (row_and_column_list[0] * 8) + row_and_column_list[1]
 
     return seat_id
-
 
 
 def run_test(testValue, expectedResult, description):
@@ -137,16 +124,3 @@ print(find_row_and_column('FFFFBFBLLL'))
 print(find_row_and_column('FFFFBFBLLR'))
 print(find_row_and_column('FFFFBFFLLR'))
 
-
-
-# f = open("day_5_datafile.txt", "r")
-
-# print(find_row_and_column(f))
-
-# # pseudocode:
-# # have a list with min rows max rows [min, max]
-# # for each item in the command
-# # check which command it is (front or back of rows)
-# # if its the back, divide the max rows to find the starting point of the range
-# # replace min rows with the new starting [min, max]
-# # 
