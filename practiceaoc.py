@@ -59,7 +59,7 @@ def find_row_and_column(file_of_commands):
 
     for command in locator_command:
 
-        row_command = command[:6]
+        row_command = command[:7]
         column_command = command[7:]
         row_and_column = []
 
