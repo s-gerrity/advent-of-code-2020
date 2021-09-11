@@ -165,9 +165,12 @@ def find_my_seat(file_of_commands):
         row_command = command[:7]
         column_command = command[7:]
         row_and_column = []
+        min_amount = 0
+        max_amount_rows = 127
+        max_amount_columns = 7
 
-        row = find_row(row_command)
-        column = find_column(column_command)
+        row = find_row_or_column(row_command, min_amount, max_amount_rows)
+        column = find_row_or_column(column_command, min_amount, max_amount_columns)
         row_and_column = [row, column]
 
         # Transforms the row and column and puts its unique seat id into a list
@@ -180,62 +183,33 @@ def find_my_seat(file_of_commands):
     return print("My seat id number is: " + str(my_seat_id))
 
 
-# @function find_row
-# Takes in a string of 'F' (for front) or 'B' (for back)
+# @function find_row_or_column
+# Takes in a string
 # Returns: integer
-# Between 0 to 127, split the range in half. Use the first half or second 
-# depending if the command is F or B (front half 0 - 63 or back half 64 -127)
-def find_row(row_locator):
-    min_rows = 0
-    max_rows = 127
-    rows_range = [min_rows, max_rows]
-    range_between_rows = max_rows - min_rows
+# For rows: Between 0 to 127 for rows, split the range in half. If indicator in string is 'F' (for front) 
+# use the first half of nums, for 'B' (for back) use the second half (for example: front half 0 - 63 or back half 64 - 127)
+# For columns: Between 0 to 7 for columns, split the range in half. If indicator in string is 'L' (for left) 
+# use the first half of nums, for 'R' (for right) use the second half (for example: front half 0 - 3 or back half 4 - 7)
+def find_row_or_column(command_locator, min_amount, max_amount):
+    rows_range = [min_amount, max_amount]
+    range_between_rows = max_amount - min_amount
     i = 0
 
-    while i <= len(row_locator):
-        for indicator in row_locator:
-            if indicator == 'F':
-                max_rows = math.floor((min_rows + (range_between_rows) / 2))
-                rows_range = [min_rows, max_rows]
-                range_between_rows = max_rows - min_rows
+    while i <= len(command_locator):
+        for indicator in command_locator:
+            if indicator == 'F' or indicator == 'L':
+                max_amount = math.floor((min_amount + (range_between_rows) / 2))
+                rows_range = [min_amount, max_amount]
+                range_between_rows = max_amount - min_amount
                 i += 1
 
-            elif indicator == 'B':
-                min_rows = math.ceil((max_rows - (range_between_rows) / 2))
-                rows_range = [min_rows, max_rows]
-                range_between_rows = max_rows - min_rows
+            elif indicator == 'B' or indicator == 'R':
+                min_amount = math.ceil((max_amount - (range_between_rows) / 2))
+                rows_range = [min_amount, max_amount]
+                range_between_rows = max_amount - min_amount
                 i += 1
 
         return rows_range[0]
-
-
-# @function column
-# Takes in a string of 'L' (for left) or 'R' (for right)
-# Returns: integer
-# Between 0 to 7, split the range in half. Use the first half or second 
-# depending if the command is F or B (left half 0 - 3 or right half 4 - 7)
-def find_column(column_locator):
-    min_columns = 0
-    max_columns = 7
-    columns_range = [min_columns, max_columns]
-    range_between_columns = max_columns - min_columns
-    i = 0
-
-    while i <= len(column_locator):
-        for indicator in column_locator:
-            if indicator == 'L':
-                max_columns = math.floor(min_columns + (range_between_columns / 2))
-                columns_range = [min_columns, max_columns]
-                range_between_columns = max_columns - min_columns
-                i += 1
-
-            elif indicator == 'R':
-                min_columns = math.ceil(max_columns - (range_between_columns / 2))
-                columns_range = [min_columns, max_columns]
-                range_between_columns = max_columns - min_columns
-                i += 1
-
-        return columns_range[0]
 
 
 # Function get_seat_id
