@@ -6,7 +6,6 @@ import math
 
 # Checks all seat ids in file to locate the highest seat id number
 def find_max_row_and_column(file_of_commands):
-    
     locator_command = file_of_commands.readlines()
     seat_ids = []
 
@@ -94,6 +93,7 @@ def find_column(column_locator):
 # Returns an integer
 # Multiply the row by 8 and add the column to get the seat id
 def get_seat_id(row_and_column_list):
+    
     seat_id = (row_and_column_list[0] * 8) + row_and_column_list[1]
 
     return seat_id
