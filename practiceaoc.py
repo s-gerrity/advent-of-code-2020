@@ -1,10 +1,24 @@
 # Day 6
 
 # pseudocode
+# for item in list [abc]
+# get len of item - 1
+# add the len to a new list
+# loop through list of string (like part 1) and check if the letter is in the list as many times as the nums list
+
+
+# for letter in word
 # 
 
 
-
+# DESIRED OUTCOME 
+[
+ [['abc']], 
+ [['a'], ['b'], ['c']], 
+ [['ab'], ['ac']], 
+ [['a'], ['a'], ['a'], ['a']], 
+ [['b']]
+]
 
 
 def read_and_format_day_six(file_of_group_customs_answers):
@@ -31,40 +45,34 @@ def read_and_format_day_six(file_of_group_customs_answers):
     # return count_yeses(split_at_double, list_of_yes_totals)
 
 
-# def count_yeses(list_of_answers, list_of_yes_totals):
+def track_group_yeses(list_of_group_answers):
+# consider recursively going through the items in the list to track how many times the 
+# answer has been responded to by everyone in the group
+# maybe make a list to add the totals to
+# when the one list is at 0 then call to sum
+# 
+
+    for item in list_of_group_answers:
+        head = item[0]
+        print(head, "head")
+        rest = item[1:]
+        for letter in rest:
+            if letter == head:
+                print("letter equals head")
 
     
+    
+    return track_group_yeses()
 
-#     for item in list_of_answers:
-#         # print(item, "item1")
-#         letters_in_string = []
-
-#         for letter in item:
-#             if letter not in letters_in_string:
-#                 letters_in_string.append(letter)
-#         # print(letters_in_string, "letters_in_string")
-#         list_of_yes_totals.append(len(letters_in_string))
-
-#     return sum_list_of_yeses(list_of_yes_totals, 0)
-
-# def sum_list_of_yeses(list_of_yes_totals, accumulated_sum):
-
-#     if len(list_of_yes_totals) == 0:
-#         return accumulated_sum
-#     else:
-
-#         head = list_of_yes_totals[0]
-#         # print(head, "head")
-#         accumulated_sum += int(head)
-#         # print(accumulated_sum, "accumulated_sum")
-        
-#         list_of_yes_totals = list_of_yes_totals[1:]
-
-#     return sum_list_of_yeses(list_of_yes_totals, accumulated_sum)
+print(track_group_yeses([
+#  [['abc']], 
+ [['a'], ['b'], ['c']], 
+#  [['ab'], ['ac']], 
+ [['a'], ['a'], ['a'], ['a']], 
+ [['b']]
+]))
 
 
-
-
-f = open("day_6_datafile.txt", "r")
+f = open("day 6 2020/day_6_datafile.txt", "r")
 
 print(read_and_format_day_six(f))
