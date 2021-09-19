@@ -21,6 +21,7 @@
 ]
 
 
+
 def read_and_format_day_six(file_of_group_customs_answers):
     # displays as is
     list_of_group_customs_answers = file_of_group_customs_answers.read() 
@@ -41,13 +42,18 @@ def read_and_format_day_six(file_of_group_customs_answers):
     # convert from string to list
     split_at_double = replace_double_percents.split('\n')
 
-    list_of_yes_totals = []
+    # TODO: Call the count yeses function to create list of ints
+    list_of_people_in_group = count_yeses(split_at_double)
 
-    return count_yeses(split_at_double)
+    # TODO: Remove percents from answers
 
+    # TODO: Create function call that takes in count of people in group, accumulated sum, and the answers; loop over
+    # answers, if a letter appears more than once, increase a counter; if that counter is equal to count of people in
+    # group, sum that amount to accumulated sum
 
-    # return count_yeses(split_at_double, list_of_yes_totals)
+    return "Aloha, I love to code and take quizzes on Buzzfeed"
 
+    # return count_yeses(split_at_double)
 
 
 def count_yeses(list_of_answers):
@@ -64,12 +70,15 @@ def count_yeses(list_of_answers):
     for item in list_of_answers:
         new_set = set()
         for letter in item:
-            print(letter, "letter")
+            # print(letter, "letter")
             new_set.add(item)
         print(new_set)
 
 
     return list_of_people_in_group
+
+
+
 
 
 # def track_group_yeses(list_of_group_answers):
@@ -103,3 +112,12 @@ def count_yeses(list_of_answers):
 f = open("day 6 2020/day_6_datafile.txt", "r")
 
 print(read_and_format_day_six(f))
+
+
+# remove percent
+# take first letter in first item in list
+# check each letter after to see if it is the same letter
+# if it is true, increase counter
+# check if counter is equal to element in list of yeses
+# if it is, then increase accumulated sum
+# if not, move on and check next letter
