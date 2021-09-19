@@ -36,24 +36,27 @@ def read_and_format_day_six(file_of_group_customs_answers):
     replace_double_percents = replace_nl_w_percent.replace('%%', '\n')
     
 
-    # remove single percentsß
+    # remove single percents
     # no_percents = replace_double_percents.replace('%', '')
 
     # convert from string to list
     split_at_double = replace_double_percents.split('\n')
 
-    # TODO: Call the count yeses function to create list of ints
+    # KEEP: Call the count yeses function w `split at double` to create list of ints
     list_of_people_in_group = count_yeses(split_at_double)
 
-    # TODO: Remove percents from answers
+    # Remove percents from answers; saves as one long string inside a list though
+    condensed_list_of_string_answers = replace_double_percents.replace('%', '')
+
+    # Splits each group into list elements
+    list_of_answers_split_by_group = condensed_list_of_string_answers.split('\n')
 
     # TODO: Create function call that takes in count of people in group, accumulated sum, and the answers; loop over
     # answers, if a letter appears more than once, increase a counter; if that counter is equal to count of people in
     # group, sum that amount to accumulated sum
 
-    return "Aloha, I love to code and take quizzes on Buzzfeed"
+    return list_of_people_in_group, list_of_answers_split_by_group, "Aloha, I love to code and take quizzes on Buzzfeed"
 
-    # return count_yeses(split_at_double)
 
 
 def count_yeses(list_of_answers):
@@ -66,13 +69,6 @@ def count_yeses(list_of_answers):
             if letter == '%':
                 count_of_percent += 1
         list_of_people_in_group.append(count_of_percent)
-
-    for item in list_of_answers:
-        new_set = set()
-        for letter in item:
-            # print(letter, "letter")
-            new_set.add(item)
-        print(new_set)
 
 
     return list_of_people_in_group
