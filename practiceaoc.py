@@ -28,16 +28,10 @@ def read_and_format_day_six(file_of_group_customs_answers):
 
     # makes into long string with %% for newline w break and % for nextline
     replace_nl_w_percent = list_of_group_customs_answers.replace('\n', '%') 
-    # print(replace_nl_w_percent)
 
     # replaced double percent with a linebreak
-    # we leave the single percent sign to indicate later how many people are
-    # in each group
+    # we leave the single percent sign to indicate later how many people are in each group
     replace_double_percents = replace_nl_w_percent.replace('%%', '\n')
-    
-
-    # remove single percents
-    # no_percents = replace_double_percents.replace('%', '')
 
     # convert from string to list
     split_at_double = replace_double_percents.split('\n')
@@ -55,7 +49,10 @@ def read_and_format_day_six(file_of_group_customs_answers):
     # answers, if a letter appears more than once, increase a counter; if that counter is equal to count of people in
     # group, sum that amount to accumulated sum
 
-    return list_of_people_in_group, list_of_answers_split_by_group, "Aloha, I love to code and take quizzes on Buzzfeed"
+    list_of_each_groups_total_yeses = []
+
+    # Outputs list of people in group and list of answers in group strings
+    return list_of_people_in_group, track_group_yeses(list_of_answers_split_by_group, list_of_people_in_group, list_of_each_groups_total_yeses), "Aloha, I love to code and take quizzes on Buzzfeed"
 
 
 
@@ -76,33 +73,31 @@ def count_yeses(list_of_answers):
 
 
 
+# TODO: need to fix the loop inside the loop of the item; shortening the head, group answer and item does not
+# work properly
+def track_group_yeses(list_of_group_answers, list_of_people_in_group, list_of_each_groups_total_yeses):
+    print(list_of_group_answers, "list_of_group_answers")
 
-# def track_group_yeses(list_of_group_answers):
-# # consider recursively going through the items in the list to track how many times the 
-# # answer has been responded to by everyone in the group
-# # maybe make a list to add the totals to
-# # when the one list is at 0 then call to sum
-# # 
+    if len(list_of_group_answers) == 0:
+        return "done"
 
-#     for item in list_of_group_answers:
-#         head = item[0]
-#         print(head, "head")
-#         rest = item[1:]
-#         for letter in rest:
-#             if letter == head:
-#                 print("letter equals head")
-
+    i = 0
+    head = list_of_group_answers[0][i]
+    print(head, "head")
     
-    
-#     return track_group_yeses()
+    while i <= len(list_of_group_answers[i]):
 
-# print(track_group_yeses([
-# #  [['abc']], 
-#  [['a'], ['b'], ['c']], 
-# #  [['ab'], ['ac']], 
-#  [['a'], ['a'], ['a'], ['a']], 
-#  [['b']]
-# ]))
+        for item in list_of_group_answers:
+            print(item, "item")
+            for letter in item:
+                print(letter, "letter")
+                i += 1
+                if head == letter:
+                    print(head, letter, "are the same")
+    list_of_group_answers = list_of_group_answers[1:]
+
+    return track_group_yeses(list_of_group_answers, list_of_people_in_group, list_of_each_groups_total_yeses)
+
 
 
 f = open("day 6 2020/day_6_datafile.txt", "r")
