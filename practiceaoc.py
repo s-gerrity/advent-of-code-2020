@@ -94,6 +94,7 @@ def track_group_yeses(list_of_group_answers, list_of_people_in_group, list_of_ea
                 i += 1
                 if head == letter:
                     print(head, letter, "are the same")
+            head = list_of_group_answers[i]
     list_of_group_answers = list_of_group_answers[1:]
 
     return track_group_yeses(list_of_group_answers, list_of_people_in_group, list_of_each_groups_total_yeses)
