@@ -71,41 +71,52 @@ def count_yeses(list_of_answers):
 
 # TODO: need to fix the loop inside the loop of the item; shortening the head, group answer and item does not
 # work properly
-def track_group_yeses(list_of_group_answers, list_of_people_in_group, list_of_each_groups_total_yeses):
-    print(list_of_group_answers, "list_of_group_answers")
+# def track_group_yeses(list_of_group_answers, list_of_people_in_group, list_of_each_groups_total_yeses):
+#     print(list_of_group_answers, "list_of_group_answers")
 
-    if len(list_of_group_answers) == 0:
-        return "done"
+#     if len(list_of_group_answers) == 0:
+#         return "done"
 
 
-    for item in list_of_group_answers:
-        i = 0
-        print(item, "item 1")
-        while i < len(item):
-            print(item, "item 2")
-            head = item[i]
-            # print(head, "head")
-            for letter in item[i+1:]:
-                # print(letter, "letter", item[i+1:], "item[i+1:]")
-                # print(i, "i 2")
+#     for item in list_of_group_answers:
+#         i = 0
+#         print(item, "item 1")
+#         while i < len(item):
+#             print(item, "item 2")
+#             head = item[i]
+#             # print(head, "head")
+#             for letter in item[i+1:]:
+#                 # print(letter, "letter", item[i+1:], "item[i+1:]")
+#                 # print(i, "i 2")
 
-                if head == letter:
-                    print(head, letter, "are the same")
-            # print(i, "i 1")
-            i += 1
-        i = 0
+#                 if head == letter:
+#                     print(head, letter, "are the same")
+#             # print(i, "i 1")
+#             i += 1
+#         i = 0
 
-    list_of_group_answers = list_of_group_answers[1:]
-    print("im here for it")
+#     list_of_group_answers = list_of_group_answers[1:]
+#     print("im here for it")
 
-    return "this is the exit"
+#     return "this is the exit"
 
     # return track_group_yeses(list_of_group_answers, list_of_people_in_group, list_of_each_groups_total_yeses)
 
 
+# with open('day 6 2020/day_6_datafile.txt') as f:
+def count_unaminous_answers_in_groups(textfile):
+    answers = 0
+    for group in f.read().split("\n\n"):
+        
+        inter = set.intersection(*[set(l) for l in group.split("\n")])
+        
+        answers += len(inter)
+        
+    return '> part two: {}'.format(answers)
+
 f = open("day 6 2020/day_6_datafile.txt", "r")
 
-print(read_and_format_day_six(f))
+print(count_unaminous_answers_in_groups(f))
 
 
 # remove percent

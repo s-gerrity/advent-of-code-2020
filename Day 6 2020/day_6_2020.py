@@ -59,3 +59,32 @@ def sum_list_of_yeses(list_of_yes_totals, accumulated_sum):
 f = open("day_6_datafile.txt", "r")
 
 print(read_and_format_day_six(f))
+
+
+# Day 6
+# Part 2
+
+
+def count_unaminous_answers_in_groups(textfile):
+
+    answers = 0
+    # reads the file and splits at empty lines to form "groups" of data
+    for group in f.read().split("\n\n"):
+        
+        # set.interesection takes two sets and compares them to each other, outputting 
+        # into a set the data that is the same in both
+        # each response in the group is divided by a new line
+        # we loop through each response in the group and if every response has the
+        # same character, it is added to the same_answers set
+        same_answers = set.intersection(*[set(char) for char in group.split("\n")])
+        
+        # in this instance, len counts how many answers each group all picked
+        # add them together for a running total 
+        answers += len(same_answers)
+        
+    return '> Part two: {}'.format(answers)
+
+
+f = open("day_6_datafile.txt", "r")
+
+print(count_unaminous_answers_in_groups(f))
