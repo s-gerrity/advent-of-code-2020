@@ -68,8 +68,12 @@ def config_down_aim(down_num, aim):
     return aim
 
 
-def config_horizontal():
-    pass
+def config_horizontal(forward_num, horizontal):
+    # increases your horizontal position by X units.
+    
+    horizontal += int(forward_num)
+
+    return horizontal
 
 # pseudocode
 # need to go through each command one by one in order, cant collect in bunches
@@ -81,30 +85,33 @@ def config_horizontal():
 # make sure aim and horizontal continue to change and save w each iteration
 
 
-def get_sub_movement(lst_sub_movement, aim):
+def get_sub_movement(lst_sub_movement, aim, horizontal):
 
     for item in lst_sub_movement:
 
         if 'forward' in item:
             forward_num = item[8:]
+            # increases your horizontal position by X units.
+            horizontal = config_horizontal(forward_num, horizontal)
+
+            
         elif 'up' in item:
+            # up X decreases your aim by X units.
             up_num = item[3:]
             aim = config_up_aim(up_num, aim)
+
         else:
             # adds up down nums to config aim
             down_num = item[5:]
             aim = config_down_aim(down_num, aim)
 
 
-    # aim_configged = config_aim(ups_lst, down_num, aim)
-    # horizontal_configged = config_horizontal(forward_total_sum, horizontal)
     print("Aim is", aim)
-    # print(depth * forwards_total_sum)
-
+    print("Horizontal is", horizontal)
 
 
 
 
 
 if __name__ == '__main__':
-    get_sub_movement(lst_sub_movement, aim)
+    get_sub_movement(lst_sub_movement, aim, horizontal)
