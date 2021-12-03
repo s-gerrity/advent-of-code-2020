@@ -42,6 +42,7 @@ lst_sub_movement = sub_movement.split('\n')
 
 aim = 0
 horizontal = 0
+depth = 0
 
 
 def sum_movement_totals(lst_of_movements):
@@ -75,6 +76,14 @@ def config_horizontal(forward_num, horizontal):
 
     return horizontal
 
+
+def get_depth(forward_num, aim, depth):
+    # increases your depth by your aim multiplied by X.
+
+    depth += int(aim) * int(forward_num)
+
+    return depth
+
 # pseudocode
 # need to go through each command one by one in order, cant collect in bunches
 # iterate through main datalist
@@ -85,33 +94,39 @@ def config_horizontal(forward_num, horizontal):
 # make sure aim and horizontal continue to change and save w each iteration
 
 
-def get_sub_movement(lst_sub_movement, aim, horizontal):
+def get_sub_movement(lst_sub_movement, aim, horizontal, depth):
 
     for item in lst_sub_movement:
 
         if 'forward' in item:
             forward_num = item[8:]
+
             # increases your horizontal position by X units.
             horizontal = config_horizontal(forward_num, horizontal)
 
+            # increases your depth by your aim multiplied by X.
+            depth = get_depth(forward_num, aim, depth)
             
         elif 'up' in item:
-            # up X decreases your aim by X units.
             up_num = item[3:]
+
+            # up X decreases your aim by X units.
             aim = config_up_aim(up_num, aim)
 
         else:
-            # adds up down nums to config aim
             down_num = item[5:]
+
+            # adds up down nums to config aim
             aim = config_down_aim(down_num, aim)
 
 
-    print("Aim is", aim)
+    # print("Aim is", aim)
     print("Horizontal is", horizontal)
+    print("Depth is", depth)
 
 
 
 
 
 if __name__ == '__main__':
-    get_sub_movement(lst_sub_movement, aim, horizontal)
+    get_sub_movement(lst_sub_movement, aim, horizontal, depth)
