@@ -67,4 +67,10 @@ if __name__ == '__main__':
     tree = Tree(root)
     print(tree)
     print("new tree =", tree.find_in_tree("muted yellow"))  # should find
-    # print("style.css = ", tree.find_in_tree("style.css"))  # should not find
+
+
+# use regex to clean data?
+# transform line to look like:
+# light red bags contain 1 bright white bag, 2 muted yellow bags.
+# light red bright white muted yellow
+# light_red = [bright_white, muted_yellow]
