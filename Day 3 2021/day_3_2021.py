@@ -62,7 +62,7 @@ def binary_to_decimal(binary):
    return int(binary, 2)
 
 
-def find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst):
+def find_power_consumption_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst):
 
     for item in lst_diagnostic_report:
 
@@ -76,6 +76,7 @@ def find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst
             gamma_num_decimal = binary_to_decimal(gamma_num_binary)
             epsilion_num_decimal = binary_to_decimal(epsilion_num_binary)
 
+            # Power consumption rate
             return int(gamma_num_decimal) * int(epsilion_num_decimal)
 
         bit = item[i]
@@ -93,10 +94,10 @@ def find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst
         zeroes = 0
         ones_lst.append(ones)
         ones = 0
-        gamma_num = find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst) 
+        gamma_num = find_power_consumption_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst) 
         
     return gamma_num
 
 
 if __name__ == '__main__':
-    print(find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst))
+    print(find_power_consumption_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst))
