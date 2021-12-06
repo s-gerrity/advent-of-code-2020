@@ -46,6 +46,24 @@ def max_zeroes_and_ones(gamma_rate_num_lst, zeroes_lst, ones_lst, i):
     return gamma_rate_num_lst
 
 
+def get_epsilion_rate(gamma_num):
+    epsilion_lst = []
+
+    for num in gamma_num:
+        if num == '0':
+            epsilion_lst.append('1')
+        else:
+            epsilion_lst.append('0')
+    
+    epsilion_num = ''.join(epsilion_lst)
+    return epsilion_num
+
+
+def binary_to_decimal(binary):
+     
+   return int(binary, 2)
+   
+
 def find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst):
 
     for item in lst_diagnostic_report:
@@ -57,6 +75,9 @@ def find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst
 
             epsilion_num = get_epsilion_rate(gamma_num)
             print(epsilion_num, "EP")
+
+            print(binary_to_decimal(gamma_num))
+
             return gamma_num
 
         bit = item[i]
@@ -77,18 +98,6 @@ def find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst
         
     return gamma_num
 
-
-def get_epsilion_rate(gamma_num):
-    epsilion_lst = []
-
-    for num in gamma_num:
-        if num == '0':
-            epsilion_lst.append('1')
-        else:
-            epsilion_lst.append('0')
-    
-    epsilion_num = ''.join(epsilion_lst)
-    return epsilion_num
 
 
 
