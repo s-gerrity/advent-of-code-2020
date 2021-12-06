@@ -28,6 +28,14 @@ gamma_rate_num_lst = []
 # once through the first of all in list, max one of zero and add to list
 # using len of item, if i is less than len, increase i and recurssively go again
 
+def get_gamma_rate(gamma_rate_num_lst, zeroes_lst, ones_lst):
+
+    gamma_num_lst = max_zeroes_and_ones(gamma_rate_num_lst, zeroes_lst, ones_lst, 0)
+    gamma_num_binary = ''.join(gamma_num_lst)
+    # gamma_num_decimal = binary_to_decimal(gamma_num_binary)
+
+    return gamma_num_binary
+
 
 def max_zeroes_and_ones(gamma_rate_num_lst, zeroes_lst, ones_lst, i):
     if i == 5:
@@ -55,30 +63,31 @@ def get_epsilion_rate(gamma_num):
         else:
             epsilion_lst.append('0')
     
-    epsilion_num = ''.join(epsilion_lst)
-    return epsilion_num
+    epsilion_num_binary = ''.join(epsilion_lst)
+    return epsilion_num_binary
 
 
 def binary_to_decimal(binary):
      
    return int(binary, 2)
-   
+
 
 def find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst):
 
     for item in lst_diagnostic_report:
         if i == 5:
-            print(zeroes_lst)
-            print(ones_lst)
-            gamma_num_lst = max_zeroes_and_ones(gamma_rate_num_lst, zeroes_lst, ones_lst, 0)
-            gamma_num = ''.join(gamma_num_lst)
+            # print(zeroes_lst)
+            # print(ones_lst)
+            # gamma_num_lst = max_zeroes_and_ones(gamma_rate_num_lst, zeroes_lst, ones_lst, 0)
+            # gamma_num = ''.join(gamma_num_lst)
 
-            epsilion_num = get_epsilion_rate(gamma_num)
-            print(epsilion_num, "EP")
+            gamma_num_binary = get_gamma_rate(gamma_rate_num_lst, zeroes_lst, ones_lst)
+            epsilion_num_binary = get_epsilion_rate(gamma_num_binary)
 
-            print(binary_to_decimal(gamma_num))
+            gamma_num_decimal = binary_to_decimal(gamma_num_binary)
+            epsilion_num_decimal = binary_to_decimal(epsilion_num_binary)
 
-            return gamma_num
+            return int(gamma_num_decimal) * int(epsilion_num_decimal)
 
         bit = item[i]
 
