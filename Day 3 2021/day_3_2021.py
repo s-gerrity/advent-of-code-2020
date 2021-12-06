@@ -27,7 +27,7 @@ def get_gamma_rate(gamma_rate_num_lst, zeroes_lst, ones_lst):
 def max_zeroes_and_ones(gamma_rate_num_lst, zeroes_lst, ones_lst, i):
     
     if i == 12:
-        print(gamma_rate_num_lst)
+        # print(gamma_rate_num_lst)
         return gamma_rate_num_lst
 
     
@@ -99,5 +99,58 @@ def find_power_consumption_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_l
     return gamma_num
 
 
+
+# PART 2
+
+# pseduocode
+# *oxygen generator rating*
+# start w the first bit in each num / line
+# find the max val either 0 or 1
+# loop back through the existing list of nums
+# append to a list the full nums where the first bit is that most common bit
+# iterate to the second bit
+# find the most common val 
+# loop through the nums again and only save the nums where the second bit is the most common val
+# recurse again
+# ** If 0 and 1 are equally common, keep values with a 1 in the position being considered.
+
+
+def find_oxygen_generator_rate(lst_diagnostic_report, zeroes, ones, i):
+
+    for item in lst_diagnostic_report:
+        
+        # Base case exit
+        if i == 5:
+            return "hi"
+
+        bit = item[i]
+        # print(bit, "bit")
+
+        if bit == '0':
+            zeroes += 1
+
+        else:
+            ones += 1
+
+    # Recursive case
+    if i < len(item):
+        print(i, "i")
+        i += 1
+        # need to make new diagnostic lst to iterate through
+        # find which 0 or 1 is max
+        # save only full items that that bit has that num
+        # call recursively and send new list in
+        max_num = max(zeroes, ones)
+        return max_num
+
+
+        # zeroes_lst.append(zeroes)
+        # zeroes = 0
+        # ones_lst.append(ones)
+        # ones = 0
+
+
+
 if __name__ == '__main__':
-    print(find_power_consumption_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst))
+    # print(find_power_consumption_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst))
+    print(find_oxygen_generator_rate(lst_diagnostic_report, zeroes, ones, i))
