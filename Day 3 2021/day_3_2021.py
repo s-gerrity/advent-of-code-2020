@@ -54,8 +54,8 @@ def find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst
             print(ones_lst)
             gamma_num_lst = max_zeroes_and_ones(gamma_rate_num_lst, zeroes_lst, ones_lst, 0)
             gamma_num = ''.join(gamma_num_lst)
-            print(gamma_num, "hello")
-            # return print(gamma_num)
+            # print(gamma_num, "hello")
+            return gamma_num
 
         bit = item[i]
 
@@ -71,10 +71,10 @@ def find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst
         zeroes = 0
         ones_lst.append(ones)
         ones = 0
-        find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst) 
+        gamma_num = find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst) 
         
 
-    return 
+    return gamma_num
 
 if __name__ == '__main__':
     print(find_gamma_rate(lst_diagnostic_report, zeroes, ones, i, zeroes_lst, ones_lst))
